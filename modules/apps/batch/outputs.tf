@@ -1,0 +1,3 @@
+output "fargate_aws_cli_task_run_command" {
+  value = "aws ecs run-task --region ${local.aws_region} --cluster ${var.cluster_name} --task-definition ${local.name_prefix} --launch-type FARGATE --network-configuration 'awsvpcConfiguration={subnets=[${join(",", data.terraform_remote_state.vpc.outputs.private_subnet_ids)}],securityGroups=[${module.ecs_template.security_group_id}],assignPublicIp=DISABLED}'"
+}
